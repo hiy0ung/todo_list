@@ -1,47 +1,89 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from "react";
-import * as s from "./style";
+import React, { useEffect, useState } from "react";
+import * as css from "./style";
 import { useNavigate } from "react-router-dom";
+import Header from "../../layouts/Header";
+import { UserInfo } from "../../types";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import { MAIN_PATH } from "../../constants";
+import { Box } from "@mui/material";
+
+const MY_PAGE_API_URL = `http://localhost:8082/api/v1/my-page`;
 
 export default function MyPage() {
-  // const [principalData, setPrincipalData] = useState<boolean>(false);
-  // const navigate = useNavigate();
+  const [principalData, setPrincipalData] = useState<boolean>(false);
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    id: 0,
+    userId: "",
+    password: "",
+    name: "",
+    email: "",
+  });
+  const [cookies, removeCookies] = useCookies(['token']);
+  const token = cookies.token;
+  const navigate = useNavigate();
+
+  const fetchUser = async () => {
+    try {
+      const response = await axios.get(MY_PAGE_API_URL, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setUserInfo(response.data.data);
+
+    } catch (error) {
+      console.error("데이터를 불러오지 못했습니다.", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  const handleDelete = async () => {
+    if(window.confirm("탈퇴하시겠습니까?")) {
+      try {
+        await axios.delete(MY_PAGE_API_URL, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        removeCookies('token', { path: '/' });
+      } catch (error) {
+        console.error("회원 탈퇴에 실패했습니다.", error);
+      }
+      alert('회원 탈퇴에 성공했습니다.');
+      navigate(MAIN_PATH);
+    } else {
+      return;
+    }
+  }
 
   return (
-    <></>
-  //   <div css={s.layout}>
-  //     <div css={s.header}>
-  //       <div css={s.imgBox}>
-  //         <div css={s.profileImg}>
-  //           <img
-  //             src="https://media.istockphoto.com/id/824883238/ko/%EC%82%AC%EC%A7%84/%EA%B2%BD%EA%B2%AC-%EC%8B%A4%ED%96%89.jpg?s=2048x2048&w=is&k=20&c=Tbmry5c8vbInOI7Kdf2DgkwQCSyaVOAcdDCS6ozwWIY="
-  //             alt="강아지프로필"
-  //           />
-  //         </div>
-  //       </div>
+      <Box css={css.container}>
+            {/* <div style={{ marginBottom: "10px" }}> */}
+              <div css={css.infoBox}>
+                아이디
+                <input type="text" css={css.infoText} value={userInfo.userId} />
+              </div>
+              <div css={css.infoBox}>
+                비밀번호
+                <input type="password" css={css.infoText} value="********" />
+              </div>
+              <div css={css.infoBox}>
+                이름
+                <input type="text" css={css.infoText} value={userInfo.name} />
+              </div>
+              <div css={css.infoBox}>
+                이메일
+                <input type="text" css={css.infoText} value={userInfo.email} />
+              </div>
+            {/* </div> */}
 
-  //       <div css={s.infoBox}>
-  //         <div css={s.infoText}>견주 이름: 이승아</div>
-  //         <div css={s.infoText}>강아지 이름: 쪼꼬미</div>
-  //         <div css={s.emailBox}>
-  //           <div css={s.infoText}>이메일: jjokkomi@example.com</div>
-  //           {principalData ? (
-  //             <div css={s.emailCheck}>✔</div>
-  //           ) : (
-  //           <button css={s.infoButton}>인증</button>
-  //           )}
-  //         </div>
-
-  //         <div css={s.infoButtons}>
-  //           <button css={s.infoButton}>정보 수정</button>
-  //           <button css={s.infoButton} onClick={() => navigate('/todo')}>비밀번호 수정</button>
-  //         </div>
-  //       </div>
-  //     </div>
-
-  //     <div css={s.bottom}>
-  //       하위 영역
-  //     </div>
-  //   </div>
+            <div css={css.infoButtons}>
+              <button css={css.infoButton}>정보 수정</button>
+              <button css={css.infoButton} onClick={() => navigate("/todo")}>
+                비밀번호 수정
+              </button>
+            </div>
+        </Box>
   );
 }

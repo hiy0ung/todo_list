@@ -1,63 +1,87 @@
 import React, { useEffect, useState } from "react";
 import UseAuthStore from "../../stores/auth.store";
 import { Box, Button, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import useThemeStore from "../../stores/theme.store";
-import { MAIN_PATH } from "../../constants";
-import '../../styles/Header.css'
+import { MAIN_PATH, MY_PAGE_PATH, SIGN_IN_PATH } from "../../constants";
+import "../../styles/Header.css";
 
 export default function Header() {
-
   //# 사용자의 인증 상태를 전역 상태 관리
-  const { isAuthenticated, user, logout, login } = UseAuthStore();
+  const { logout } = UseAuthStore();
 
-  //# 전체 테마의 상태를 전역 상태 관리 
-  const { theme, toggleTheme } = useThemeStore();
+  //# 사용자의 토큰을 관리하는 쿠키
+  const [cookies, setCookies] = useCookies(["token"]);
+  const token = cookies.token;
 
-  //# 사용자의 토큰을 관리하는 쿠키 
-  const [cookies, setCookies] = useCookies(['token']);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!cookies.token) {
+    if (!token) {
       logout();
     }
-  }, [cookies.token, logout])
+  }, [token, logout]);
 
-  //# event handler: 로그아웃 버튼 클릭 시 이벤트 핸들러 //
-  const handleLogoutClick = ()  => {
-    setCookies('token', '', { expires: new Date() });
-    logout();
+  const handleNavigateMain = () => {
+    navigate(MAIN_PATH);
   }
 
+  const handleNavigateLogout = () => {
+    setCookies("token", "", { expires: new Date() });
+    logout();
+    navigate(MAIN_PATH);
+  };
+
+  const handleNavigateMyPage = () => {
+    navigate(MY_PAGE_PATH);
+  };
+
+  const handleNavigateSignIn = () => {
+    navigate(SIGN_IN_PATH);
+  }
   return (
-    <div className='headerContainer'>
-        <Box className='themeButton'>
-          <Button variant="contained" onClick={toggleTheme} style={{ backgroundColor: "#f4a261"}}>
-            {theme === 'light' ? '다크 모드' : '라이트 모드'}
-          </Button>
-        </Box>
-          
-        <Box className='logo'>
-          <Typography variant="h3">Todo-List</Typography>
-        </Box>
-        <Box className='authSection'>
-          {isAuthenticated ? (
-            <Typography 
-              className='authText'
-              variant="subtitle1" 
-              onClick={handleLogoutClick}>
+    <div className="headerContainer">
+      <Box className="themeButton">
+        <Button
+          variant="contained"
+          onClick={handleNavigateMain}
+          style={{ backgroundColor: "#f4a261" }}
+        >
+          메인으로
+        </Button>
+      </Box>
+
+      <Box className="logo">
+        <Typography variant="h3">Todo-List</Typography>
+      </Box>
+      <Box className="authSection">
+        {token ? (
+          <>
+            <Typography
+              className="authText"
+              variant="subtitle1"
+              onClick={handleNavigateMyPage}
+            >
+              마이페이지
+            </Typography>
+            <Typography
+              className="authText"
+              variant="subtitle1"
+              onClick={handleNavigateLogout}
+            >
               로그아웃
             </Typography>
-          ) : (
-            <Link
-              to={MAIN_PATH}
-              className='authText'
+          </>
+        ) : (
+            <Typography 
+              className="authText"
+              variant="subtitle1" 
+              onClick={handleNavigateSignIn}
             >
-              <Typography variant="subtitle1">로그인</Typography>
-            </Link>
-          )}
-        </Box>
+              로그인
+            </Typography>
+        )}
+      </Box>
     </div>
   );
 }

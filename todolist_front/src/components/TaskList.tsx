@@ -47,19 +47,21 @@ export default function TaskList({ todos, updateStatus, updateTodo, deleteTodo }
           ) : (
             <span className={todo.status ? "completed-text" : ""} onClick={() => updateStatus(todo)}>{todo.content}</span>
           )}
-          <i 
-            className="bi bi-pencil edit-btn" 
-            onClick={(e) => {
-              e.stopPropagation(); 
-              handleUpdate(todo);
-            }}
-          ></i>
-          <i 
-            className="bi bi-x-square delete-btn"
-            onClick={(e) => {
-              e.stopPropagation();
-              deleteTodo(todo)}}
-          ></i>
+          <>
+            <i 
+              className="bi bi-pencil edit-btn" 
+              onClick={(e) => {
+                e.stopPropagation(); 
+                handleUpdate(todo);
+              }}
+            ></i>
+            <i 
+              className="bi bi-x-square delete-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteTodo(todo)}}
+            ></i>
+          </>
         </li>
       ))}
     </ul>

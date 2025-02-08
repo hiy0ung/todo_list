@@ -11,11 +11,11 @@ export const btnContainer = css`
 
 export const authBtn = css`
   width: 50%;
-  height: 10%;
-  margin: 3%;
+  height: 70px;
   border: none;
   border-radius: 10px;
   background-color: #f4a261;
+  margin: 20px;
   color: white;
   font-size: 100%;
   cursor: pointer;

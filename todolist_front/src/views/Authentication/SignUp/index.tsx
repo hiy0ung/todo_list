@@ -1,16 +1,16 @@
+/** @jsxImportSource @emotion/react */
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
+  Box,
   Button,
-  Card,
-  CardActions,
-  CardContent,
   TextField,
   Typography,
 } from "@mui/material";
 import axios from "axios";
 import { SIGN_IN_PATH } from "../../../constants";
+import * as css from "../style";
 
 interface UserInfo {
   userId: string;
@@ -88,13 +88,13 @@ export default function SignUp() {
   };
 
   return (
-    <div>
+    <Box css={css.container}>
         <Typography variant="h5" mb={2}>
           회원가입
         </Typography>
 
         <TextField
-          label="아이디"
+          placeholder="아이디"
           type="text"
           name="userId"
           variant="outlined"
@@ -104,10 +104,12 @@ export default function SignUp() {
           margin="normal"
           error={!!errors.userId}
           helperText={errors.userId}
+          color="warning"
+          css={css.inputStyle}
         />
 
         <TextField
-          label="비밀번호"
+          placeholder="비밀번호"
           type="password"
           name="password"
           variant="outlined"
@@ -117,10 +119,12 @@ export default function SignUp() {
           margin="normal"
           error={!!errors.password}
           helperText={errors.password}
+          color="warning"
+          css={css.inputStyle}
         />
 
         <TextField
-          label="비밀번호확인"
+          placeholder="비밀번호확인"
           type="password"
           name="checkPassword"
           variant="outlined"
@@ -130,10 +134,12 @@ export default function SignUp() {
           margin="normal"
           error={!!errors.checkPassword}
           helperText={errors.checkPassword}
+          color="warning"
+          css={css.inputStyle}
         />
 
         <TextField
-          label="이름"
+          placeholder="이름"
           type="text"
           name="name"
           variant="outlined"
@@ -143,10 +149,12 @@ export default function SignUp() {
           margin="normal"
           error={!!errors.name}
           helperText={errors.name}
+          color="warning"
+          css={css.inputStyle}
         />
 
         <TextField
-          label="이메일"
+          placeholder="이메일"
           type="email"
           name="email"
           variant="outlined"
@@ -156,6 +164,8 @@ export default function SignUp() {
           margin="normal"
           error={!!errors.email}
           helperText={errors.email}
+          color="warning"
+          css={css.inputStyle}
         />
 
         {errors.form && (
@@ -167,10 +177,10 @@ export default function SignUp() {
           onClick={handleSignUp}
           fullWidth
           variant="contained"
-          color="primary"
+          css={css.btnStyle}
         >
           가입하기
         </Button>
-    </div>
+    </Box>
   );
 }

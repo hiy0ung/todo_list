@@ -1,65 +1,39 @@
 import { css } from'@emotion/react';
-export const layout = css`
-  box-sizing: border-box;
-  padding: 20px;
-  width: 100%;
+export const container = css`
+  width: 50%;
   height: 100%;
-`;
-
-export const header = css`
-  box-sizing: border-box;
+  margin: 15px auto;
   display: flex;
-  margin-bottom: 20px;
-  border: 1px solid #dbdbdb;
-  padding: 10px 30px;
-  width: 100%;
-  height: 200px;
-  background-color: white;
-`;
-
-export const imgBox = css`
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  width: 178px;
-  height: 100%;
-`;
-
-export const profileImg = css`
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #dbdbdb;
-  border-radius: 50%;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  & > img {
-    height: 100%;
-  }
+  padding: 30px;
+  border-radius: 15px;
+  background-color: antiquewhite;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 `;
 
 export const infoBox = css`
-  box-sizing: border-box;
-  margin-left: 30px;
-  padding-top: 30px;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
 `;
 
 export const infoText = css`
+  width: 80%;
+  padding: 10px;
   font-size: 14px;
   font-weight: 600;
-  margin-bottom: 10px;
-`;
+  border: none;
+  outline: none;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 
-export const emailBox = css`
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-
-  & > div:nth-of-type(1) {
-    margin: 0px 10px 0px 0px
+  &:focus {
+    outline: none;
   }
 `;
 
@@ -69,6 +43,7 @@ export const infoButton = css`
   border-radius: 3px;
   background-color: white;
   font-size: 12px;
+  padding: 5px;
   cursor: pointer;
 
   &:hover {
@@ -80,31 +55,15 @@ export const infoButton = css`
   }
 `;
 
-export const emailCheck = css`
-  display: flex;
-  align-items: center;
-  color: #008734;
-  font-weight: 600;
-`;
-
 export const infoButtons = css`
+  width: 80%;
   box-sizing: border-box;
   display: flex;
   padding-top: 5px;
+  justify-content: flex-end;
 
   & > button:nth-of-type(1) {
     margin-right: 10px;
   }
 `;
 
-export const bottom = css`
-  box-sizing: border-box;
-  display: flex;
-  margin-bottom: 20px;
-  border: 1px solid #dbdbdb;
-  border-radius: 3px;
-  padding: 10px;
-  width: 100%;
-  height: 250px;
-  background-color: white;
-`;

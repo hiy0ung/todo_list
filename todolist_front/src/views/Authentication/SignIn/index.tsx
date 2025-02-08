@@ -1,35 +1,26 @@
-import { Button, Card, CardActions, CardContent, TextField, Typography } from "@mui/material";
+/** @jsxImportSource @emotion/react */
+import { Box, Button, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import UseAuthStore from "../../../stores/auth.store";
 import { TODO_PATH } from "../../../constants";
+import { Credentials, SignInResponseDto } from "../../../types";
+import * as css from "../style";
 
-interface Credentials {
-  userId: string;
-  password: string;
-}
-
-interface SignInResponseDto {
-  token: string;
-  exprTime: number;
-}
+const SIGN_IN_API_URL = `http://localhost:8082/api/v1/auth/sign-in`;
 
 export default function SignIn() {
-  //! 로그인 된 사용자 상태 관리
   const [credentials, setCredentials] = useState<Credentials>({
     userId: "",
     password: ""
   });
 
-  //! 에러 메세지 상태 관리
   const [error, setError] = useState<string>("");
 
-  //! 쿠키 설정 함수
   const [, setCookies] = useCookies(["token"]);
 
-  //! 전역 상태 사용자 정보
   const { login } = UseAuthStore();
 
   const navigate = useNavigate();
@@ -79,7 +70,7 @@ export default function SignIn() {
     }
 
     try {
-      const response = await axios.post(`http://localhost:8082/api/v1/auth/sign-in`, credentials);
+      const response = await axios.post(SIGN_IN_API_URL, credentials);
 
       if (response.data) {
         signInSuccessResponse(response.data.data);
@@ -91,14 +82,13 @@ export default function SignIn() {
   }
 
   return (
-    <div>
+    <Box css={css.container}>
         <Typography variant="h5" mb={2}>
           로그인
         </Typography>
 
-        {/* 입력 필드 */}
         <TextField
-          label="아이디"
+          placeholder="아이디"
           type="text"
           name="userId"
           variant="outlined"
@@ -106,10 +96,12 @@ export default function SignIn() {
           onChange={handleInputChange}
           fullWidth
           margin="normal"
+          color="warning"
+          css={css.inputStyle}
         />
 
         <TextField
-          label="비밀번호"
+          placeholder="비밀번호"
           type="password"
           name="password"
           variant="outlined"
@@ -117,6 +109,8 @@ export default function SignIn() {
           onChange={handleInputChange}
           fullWidth
           margin="normal"
+          color="warning"
+          css={css.inputStyle}
         />
 
         {error && (
@@ -128,10 +122,11 @@ export default function SignIn() {
           onClick={handleSignIn}
           fullWidth
           variant="contained"
-          color="primary"
+          css={css.btnStyle}
+
         >
           로그인
         </Button>
-    </div>
+    </Box>
   );
 }

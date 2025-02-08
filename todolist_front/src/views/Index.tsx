@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './App.css';
+import '../App.css'
 
 import { Route, Routes } from 'react-router-dom';
 
@@ -9,23 +9,21 @@ import UseAuthStore from '../stores/auth.store';
 import Container from '../layouts/Container';
 import SignIn from './Authentication/SignIn';
 import SignUp from './Authentication/SignUp';
-import { MAIN_PATH, SIGN_IN_PATH, SIGN_UP_PATH, TODO_PATH, USER_PATH } from '../constants';
-import User from './User';
+import { MAIN_PATH, MY_PAGE_PATH, SIGN_IN_PATH, SIGN_UP_PATH, TODO_PATH } from '../constants';
 import Todo from './TodoList';
 import Main from './Main';
+import MyPage from './MyPage/MyPage';
 
 function Index() {
   const [cookies, setCookies, removeCookie] = useCookies(['token']);
   const { login, logout } = UseAuthStore();
 
-  //# fucntion #//
-  // & fetchUserData 함수: 사용자 데이터를 가져오는 비동기 함수 //
   const fetchUserData = async () => {
     const token = cookies.token;
 
     if (token) {
       try {
-        const response = await axios.get('http://localhost:8082/api/v1/users', {
+        const response = await axios.get('http://localhost:8082/api/v1/my-page', {
           headers: {
             Authorization: `Bearer ${token}`,
           }
@@ -76,7 +74,7 @@ function Index() {
           <Route path={MAIN_PATH} element={<Main />} />
           <Route path={SIGN_IN_PATH} element={<SignIn />} />
           <Route path={SIGN_UP_PATH} element={<SignUp />} />
-          <Route path={USER_PATH} element={<User />} />
+          <Route path={MY_PAGE_PATH} element={<MyPage />} />
           <Route path={TODO_PATH} element={<Todo />} />
         </Route>
       </Routes>

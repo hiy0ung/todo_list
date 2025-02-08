@@ -94,7 +94,6 @@ export default function TodoList() {
 
   return (
     <div css={css.todoContainer}>
-      <Header />
       <Clock />
       <ProgressBar todos={todos} />
       <TaskForm 
