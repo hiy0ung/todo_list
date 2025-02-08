@@ -1,7 +1,6 @@
 import React from 'react'
 import { Outlet, useLocation } from 'react-router-dom';
 import { MAIN_PATH } from '../../constants';
-import Footer from '../Footer';
 import Header from '../Header';
 import useThemeStore from '../../stores/theme.store';
 import { Box } from '@mui/material';
@@ -31,7 +30,6 @@ export default function Container() {
         <Outlet /> 
       </Box>
       <hr />
-      { pathname !== MAIN_PATH && <Footer /> }
     </>
   )
 }

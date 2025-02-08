@@ -1,8 +1,10 @@
-.todo-container {
+import { css } from "@emotion/react";
+
+export const todoContainer = css`
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #f9f3ee;
   min-height: 100vh;
   color: #5a5a5a;
-}
+`;

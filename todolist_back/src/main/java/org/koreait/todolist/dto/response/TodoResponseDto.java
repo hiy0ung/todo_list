@@ -8,13 +8,11 @@ import org.koreait.todolist.entity.Todo;
 @NoArgsConstructor
 public class TodoResponseDto {
     private Long id;
-    private String userId;
     private String content;
     private Boolean status;
 
     public TodoResponseDto (Todo todo) {
         this.id = todo.getId();
-        this.userId = todo.getUser().getUserId();
         this.content = todo.getContent();
         this.status = todo.getStatus();
     }

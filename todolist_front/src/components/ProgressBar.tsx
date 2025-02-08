@@ -4,12 +4,12 @@ import { Todo } from '../types';
 
 
 interface ProgressBarProps {
-  tasks: Todo[];
+  todos: Todo[];
 }
 
-export default function ProgressBar({ tasks }: ProgressBarProps) {
-  const completedTasks = tasks.filter(task => task.status).length;
-  const progress = tasks.length ? (completedTasks / tasks.length) * 100 : 0;
+export default function ProgressBar({ todos }: ProgressBarProps) {
+  const completedTasks = todos.filter(todo => todo.status).length;
+  const progress = todos.length ? (completedTasks / todos.length) * 100 : 0;
 
   return (
     <div className="progress">

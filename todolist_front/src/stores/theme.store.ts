@@ -1,6 +1,3 @@
-// theme.store.ts
-// : 전역 테마 상태 관리
-
 import { create } from "zustand";
 
 interface ThemeStoreType {
