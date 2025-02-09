@@ -21,9 +21,14 @@ export const infoBox = css`
   font-weight: bold;
 `;
 
+export const infoTitle = css`
+  width: 30%;
+`;
+
 export const infoText = css`
   width: 80%;
   padding: 10px;
+  margin-left: 10px;
   font-size: 14px;
   font-weight: 600;
   border: none;
@@ -40,10 +45,10 @@ export const infoText = css`
 export const infoButton = css`
   box-sizing: border-box;
   border: 1px solid #dbdbdb;
-  border-radius: 3px;
+  border-radius: 8px;
   background-color: white;
   font-size: 12px;
-  padding: 5px;
+  padding: 8px;
   cursor: pointer;
 
   &:hover {

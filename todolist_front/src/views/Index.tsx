@@ -9,10 +9,11 @@ import UseAuthStore from '../stores/auth.store';
 import Container from '../layouts/Container';
 import SignIn from './Authentication/SignIn';
 import SignUp from './Authentication/SignUp';
-import { MAIN_PATH, MY_PAGE_PATH, SIGN_IN_PATH, SIGN_UP_PATH, TODO_PATH } from '../constants';
+import { MAIN_PATH, MY_PAGE_PATH, MY_PAGE_UPDATE_PATH, SIGN_IN_PATH, SIGN_UP_PATH, TODO_PATH } from '../constants';
 import Todo from './TodoList';
 import Main from './Main';
 import MyPage from './MyPage/MyPage';
+import UpdateMyPage from './MyPage/UpdateMyPage';
 
 function Index() {
   const [cookies, setCookies, removeCookie] = useCookies(['token']);
@@ -75,6 +76,7 @@ function Index() {
           <Route path={SIGN_IN_PATH} element={<SignIn />} />
           <Route path={SIGN_UP_PATH} element={<SignUp />} />
           <Route path={MY_PAGE_PATH} element={<MyPage />} />
+          <Route path={MY_PAGE_UPDATE_PATH} element={<UpdateMyPage />} />
           <Route path={TODO_PATH} element={<Todo />} />
         </Route>
       </Routes>
