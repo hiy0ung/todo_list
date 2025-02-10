@@ -11,7 +11,6 @@ import { Box } from "@mui/material";
 const MY_PAGE_API_URL = `http://localhost:8082/api/v1/my-page`;
 
 export default function MyPage() {
-  const [principalData, setPrincipalData] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState<UserInfo>({
     id: 0,
     userId: "",
@@ -56,32 +55,44 @@ export default function MyPage() {
   };
 
   return (
-    <Box css={css.container}>
-      <div css={css.infoBox}>
-        <div css={css.infoTitle}>아이디</div>
-        <input type="text" css={css.infoText} value={userInfo.userId} />
-      </div>
-      <div css={css.infoBox}>
-        <div css={css.infoTitle}>비밀번호</div>
-        <input type="password" css={css.infoText} value="********" />
-      </div>
-      <div css={css.infoBox}>
-        <div css={css.infoTitle}>이름</div>
-        <input type="text" css={css.infoText} value={userInfo.name} />
-      </div>
-      <div css={css.infoBox}>
-        <div css={css.infoTitle}>이메일</div>
-        <input type="text" css={css.infoText} value={userInfo.email} />
-      </div>
+    <div>
+      <h2 css={css.titleStyle}>마이페이지</h2>
+      <Box css={css.container}>
+        <div css={css.infoBox}>
+          <div css={css.infoTitle}>아이디</div>
+          <input type="text" css={css.infoText} value={userInfo.userId}
+          disabled
+          />
+        </div>
+        <div css={css.infoBox}>
+          <div css={css.infoTitle}>비밀번호</div>
+          <input type="password" css={css.infoText} value="********" 
+          disabled
+          />
+        </div>
+        <div css={css.infoBox}>
+          <div css={css.infoTitle}>이름</div>
+          <input type="text" css={css.infoText} value={userInfo.name} 
+          disabled
+          />
+        </div>
+        <div css={css.infoBox}>
+          <div css={css.infoTitle}>이메일</div>
+          <input type="text" css={css.infoText} value={userInfo.email} 
+          disabled
+          />
+        </div>
 
-      <div css={css.infoButtons}>
-        <button
-          css={css.infoButton}
-          onClick={() => navigate(MY_PAGE_UPDATE_PATH, { state: userInfo })}
-        >
-          정보 수정
-        </button>
-      </div>
-    </Box>
+        <div css={css.infoButtons}>
+          <button
+            css={css.infoButton}
+            onClick={() => navigate(MY_PAGE_UPDATE_PATH, { state: userInfo })}
+          >
+            정보 수정
+          </button>
+          <button css={css.infoButton} onClick={handleDelete}>회원 탈퇴</button>
+        </div>
+      </Box>
+    </div>
   );
 }

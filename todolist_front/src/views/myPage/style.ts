@@ -1,4 +1,10 @@
 import { css } from'@emotion/react';
+
+export const titleStyle = css`
+  text-align: center;
+  margin-bottom: 20px;
+`;
+
 export const container = css`
   width: 50%;
   height: 100%;
@@ -26,6 +32,23 @@ export const infoTitle = css`
 `;
 
 export const infoText = css`
+  width: 80%;
+  padding: 10px;
+  margin-left: 10px;
+  font-size: 14px;
+  color: black;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const updateInfoText = css`
   width: 80%;
   padding: 10px;
   margin-left: 10px;

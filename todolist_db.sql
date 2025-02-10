@@ -16,3 +16,5 @@ create table todos (
     status boolean not null default false, -- TINYINT default 0
     foreign key (user_id) references users (id)
 );
+
+select * from todos;

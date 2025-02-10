@@ -44,54 +44,55 @@ export default function UpdateMyPage() {
     }
   };
   return (
-    <Box css={css.container}>
-      <div css={css.infoBox}>
-        <div css={css.infoTitle}>아이디</div>
-        <input
-          type="text"
-          css={css.infoText}
-          value={formData.userId}
-          disabled
-        />
-      </div>
-      <div css={css.infoBox}>
-        <div css={css.infoTitle}>비밀번호</div>
-        <input 
-          type="password"
-          name="password"
-          css={css.infoText}
-          value={formData.password} 
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div css={css.infoBox}>
-        <div css={css.infoTitle}>이름</div>
-        <input 
-          type="text" 
-          css={css.infoText} 
-          value={formData.name} 
-          disabled
-        />
-      </div>
-      <div css={css.infoBox}>
-        <div css={css.infoTitle}>이메일</div>
-        <input
-          type="text"
-          name="email"
-          css={css.infoText}
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </div>
+    <div>
+      <h2 css={css.titleStyle}>정보 수정</h2>
+      <Box css={css.container}>
+        <div css={css.infoBox}>
+          <div css={css.infoTitle}>아이디</div>
+          <input
+            type="text"
+            css={css.infoText}
+            value={formData.userId}
+            disabled
+          />
+        </div>
+        <div css={css.infoBox}>
+          <div css={css.infoTitle}>비밀번호</div>
+          <input 
+            type="password"
+            name="password"
+            css={css.updateInfoText}
+            value={formData.password} 
+            onChange={handleChange}
+          />
+        </div>
+        <div css={css.infoBox}>
+          <div css={css.infoTitle}>이름</div>
+          <input 
+            type="text" 
+            css={css.infoText} 
+            value={formData.name} 
+          />
+        </div>
+        <div css={css.infoBox}>
+          <div css={css.infoTitle}>이메일</div>
+          <input
+            type="text"
+            name="email"
+            css={css.updateInfoText}
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-      <div css={css.infoButtons}>
-        <button css={css.infoButton} onClick={handleSubmit}>완료</button>
-        <button css={css.infoButton} onClick={() => navigate(MY_PAGE_PATH)}>
-          취소
-        </button>
-      </div>
-    </Box>
+        <div css={css.infoButtons}>
+          <button css={css.infoButton} onClick={handleSubmit}>완료</button>
+          <button css={css.infoButton} onClick={() => navigate(MY_PAGE_PATH)}>
+            취소
+          </button>
+        </div>
+      </Box>
+    </div>
   );
 }
