@@ -77,6 +77,7 @@ public class TodoService {
                     .orElseThrow(() -> new IllegalArgumentException(ResponseMessage.NOT_EXIST_DATA));
 
             todo.setContent(dto.getContent());
+            todoRepository.save(todo);
             data = new TodoResponseDto(todo);
 
         } catch (Exception e) {
@@ -96,6 +97,7 @@ public class TodoService {
 
             Todo todo = todoRepository.findByIdAndUser(id, user)
                     .orElseThrow(() -> new IllegalArgumentException(ResponseMessage.NOT_EXIST_DATA));
+
 
             todo.setStatus(updateStatus);
             todoRepository.save(todo);
